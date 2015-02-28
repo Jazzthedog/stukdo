@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @to_do = current_user.tasks.where(state: "to_do")
+    @doing = current_user.tasks.where(state: "doing")
+    @done = current_user.tasks.where(state: "done")
   end
 
   # GET /tasks/1
@@ -24,7 +27,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
@@ -69,6 +72,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:content)
+      params.require(:task).permit(:content, :state)
     end
 end
