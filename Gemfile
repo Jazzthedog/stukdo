@@ -46,3 +46,8 @@ gem 'simple_form'
 
 #gem 'devise', '~> 3.4.1'
 gem 'devise', '~> 3.3.0'
+
+#gem 'auto_html', '~> 1.6.4'  This gave me errors
+#gem 'auto_html'              This don't work either!!
+#gem "auto_html"              This one didn't work either! dam! so close!!! :)
+gem 'auto_html', '~> 1.5.1'
