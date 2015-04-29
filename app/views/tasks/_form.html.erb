@@ -6,5 +6,8 @@
     	input_html: {class:"form-control"}, placeholder: "Content" %>
 
     <%= f.button :submit, class: "btn btn-lg btn-primary btn-block" %>
-
+    <%#= f.button :submit, "Archive Task", class: "btn btn-lg btn-primary btn-block" %>
+    <% if @task.state == 'done' %>
+      <%= link_to "Archive Task", change_task_path(@task, state: 'archive'), method: :put %>
+    <% end %>
 <% end %>

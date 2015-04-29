@@ -10,4 +10,8 @@ class PagesController < ApplicationController
 
   def test
   end
+
+  def archive
+  	 @archive = current_user.tasks.where(state: "archive")
+  end
 end

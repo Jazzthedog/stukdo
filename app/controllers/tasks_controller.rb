@@ -1,13 +1,14 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :change]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :change, :archive]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @to_do = current_user.tasks.where(state: "to_do")
-    @doing = current_user.tasks.where(state: "doing")
-    @done = current_user.tasks.where(state: "done")
+    @to_do = current_user.tasks.where(state: "to_do").order("created_at DESC")
+    @doing = current_user.tasks.where(state: "doing").order("created_at DESC")
+    @done = current_user.tasks.where(state: "done").order("created_at DESC")
+    @archive = current_user.tasks.where(state: "archive")
   end
 
   # GET /tasks/1
@@ -61,6 +62,15 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def archive
+    # need to add a custom route for this "custom" action! 
+    # We need a "PUT" for change_task tasks#change
+    @task.update_attributes(state: 'archive')
+    respond_to do |format|
+      format.html {redirect_to tasks_archive_path, notice: "Task Updated - Achived!"}
     end
   end
 

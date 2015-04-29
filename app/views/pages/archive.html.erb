@@ -1,0 +1,10 @@
+<h1>To Do Archive</h1>
+<div class="row">
+  <div class="col-md-8">
+  	<% if @archive == nil %>
+  		<p> No archives found!</p>
+  	<% else %>
+	  	<p><%= render 'pages/archive' %></p>
+  	<% end %>
+  </div>
+</div>

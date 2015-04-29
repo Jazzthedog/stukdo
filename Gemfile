@@ -51,3 +51,5 @@ gem 'devise', '~> 3.3.0'
 #gem 'auto_html'              This don't work either!!
 #gem "auto_html"              This one didn't work either! dam! so close!!! :)
 gem 'auto_html', '~> 1.5.1'
+#gem 'pry', group: [:development, :test]
+gem 'pry-rails', '~> 0.3.4'
